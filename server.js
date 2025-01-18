@@ -1,0 +1,27 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+// Inizializzazione dell'app
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+//Connettiti a MongoDB
+mongoose.connect("mongodb+srv://mikitombesi:<momomo07>@cluster0.117e8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+)
+.then(() => console.log("Connesso a MongoDB Atlas"))
+.catch((error) => console.error("Errore di connessione a MongoDB:", error));
+
+// Rotta di prova
+app.get("/", (req, res) => {
+  res.send("Il server è in esecuzione!");
+});
+
+// Avvio del server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server in esecuzione su http://localhost:${PORT}`);
+});
